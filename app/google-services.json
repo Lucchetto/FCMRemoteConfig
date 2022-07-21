@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "557344599817",
+    "project_id": "random-stuff-6aa23",
+    "storage_bucket": "random-stuff-6aa23.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:557344599817:android:1c0750592cd59e27e1add8",
+        "android_client_info": {
+          "package_name": "com.example.fcmremoteconfig"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "557344599817-86kngds5v4r9v5cl8jolanlrpqd3srvn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDPS4QNMymzYWoY8vQ0dFeXnSo7OPW8zqI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "557344599817-86kngds5v4r9v5cl8jolanlrpqd3srvn.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
