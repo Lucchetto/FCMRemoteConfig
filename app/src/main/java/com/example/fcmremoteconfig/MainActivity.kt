@@ -21,6 +21,14 @@ class MainActivity : AppCompatActivity() {
 
         setSupportActionBar(binding.toolbar)
 
+        if (!checkPlayServices()) {
+            RemoteConfigUtils.setupPeriodicSync()
+            RemoteConfigUtils.testPeriodicFetch()
+        } else {
+            if (RemoteConfigUtils.getRemoteConfigStale(this)) {
+                RemoteConfigUtils.testFCMSync(applicationContext)
+            }
+        }
         binding.fcmAvailable.text = "FCM ${checkPlayServices()}"
     }
 
