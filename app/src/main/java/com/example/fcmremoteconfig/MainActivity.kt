@@ -23,10 +23,10 @@ class MainActivity : AppCompatActivity() {
 
         if (!checkPlayServices()) {
             RemoteConfigUtils.setupPeriodicSync()
-            RemoteConfigUtils.testPeriodicFetch()
+            RemoteConfigUtils.fetchPeriodic()
         } else {
             if (RemoteConfigUtils.getRemoteConfigStale(this)) {
-                RemoteConfigUtils.testFCMSync(applicationContext)
+                RemoteConfigUtils.fetchFCM(applicationContext)
             }
         }
         binding.fcmAvailable.text = "FCM ${checkPlayServices()}"

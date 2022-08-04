@@ -12,6 +12,10 @@ class RemoteConfigUtils {
     companion object {
         private const val REMOTE_CONFIG_STALE_PREF_KEY = "remote_config_stale"
 
+        /**
+         * Setup fetch interval for periodic configuration sync on startup when play services
+         * are not available
+         */
         fun setupPeriodicSync() {
             val remoteConfig: FirebaseRemoteConfig = Firebase.remoteConfig
             val configSettings = remoteConfigSettings {
@@ -20,7 +24,11 @@ class RemoteConfigUtils {
             remoteConfig.setConfigSettingsAsync(configSettings)
         }
 
-        fun testPeriodicFetch() {
+        /**
+         * Fetch remote configuration when play services are not available, invoke this on startup,
+         * it will sync new config when "minimumFetchIntervalInSeconds" has passed
+         */
+        fun fetchPeriodic() {
             val remoteConfig = Firebase.remoteConfig
 
             remoteConfig.fetchAndActivate().addOnCompleteListener {
@@ -28,7 +36,11 @@ class RemoteConfigUtils {
             }
         }
 
-        fun testFCMSync(context: Context) {
+        /**
+         * Fetch remote configuration when play services are available, invoke this on startup when
+         * the configuration is marked as stale by push notification
+         */
+        fun fetchFCM(context: Context) {
             val remoteConfig = Firebase.remoteConfig
             remoteConfig.fetch(0).onSuccessTask {
                 remoteConfig.activate()
