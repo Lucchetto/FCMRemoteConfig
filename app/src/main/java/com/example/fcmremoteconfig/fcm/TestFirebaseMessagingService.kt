@@ -7,8 +7,12 @@ import com.google.firebase.messaging.RemoteMessage
 
 class TestFirebaseMessagingService: FirebaseMessagingService() {
 
+    override fun onNewToken(token: String) {
+        super.onNewToken(token)
+    }
+
     init {
-        FirebaseMessaging.getInstance().subscribeToTopic("REMOTE_CONFIG")
+        println("start FirebaseMessagingService")
     }
 
     override fun onMessageReceived(message: RemoteMessage) {
