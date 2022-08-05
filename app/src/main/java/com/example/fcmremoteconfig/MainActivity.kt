@@ -5,9 +5,6 @@ import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import com.example.fcmremoteconfig.databinding.ActivityMainBinding
-import com.google.android.gms.common.ConnectionResult
-import com.google.android.gms.common.GoogleApiAvailability
-
 
 class MainActivity : AppCompatActivity() {
 
@@ -21,15 +18,7 @@ class MainActivity : AppCompatActivity() {
 
         setSupportActionBar(binding.toolbar)
 
-        if (!checkPlayServices()) {
-            RemoteConfigUtils.setupPeriodicSync()
-            RemoteConfigUtils.fetchPeriodic()
-        } else {
-            if (RemoteConfigUtils.getRemoteConfigStale(this)) {
-                RemoteConfigUtils.fetchFCM(applicationContext)
-            }
-        }
-        binding.fcmAvailable.text = "FCM ${checkPlayServices()}"
+        binding.fcmAvailable.text = "FCM ${RemoteConfigUtils.checkPlayServices(this)}"
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -47,7 +36,4 @@ class MainActivity : AppCompatActivity() {
             else -> super.onOptionsItemSelected(item)
         }
     }
-
-    private fun checkPlayServices(): Boolean =
-        GoogleApiAvailability.getInstance().isGooglePlayServicesAvailable(this) == ConnectionResult.SUCCESS
 }

@@ -2,6 +2,8 @@ package com.example.fcmremoteconfig
 
 import android.content.Context
 import androidx.preference.PreferenceManager
+import com.google.android.gms.common.ConnectionResult
+import com.google.android.gms.common.GoogleApiAvailability
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig
 import com.google.firebase.remoteconfig.ktx.remoteConfig
@@ -11,6 +13,9 @@ class RemoteConfigUtils {
 
     companion object {
         private const val REMOTE_CONFIG_STALE_PREF_KEY = "remote_config_stale"
+
+        fun checkPlayServices(context: Context): Boolean =
+            GoogleApiAvailability.getInstance().isGooglePlayServicesAvailable(context) == ConnectionResult.SUCCESS
 
         /**
          * Setup fetch interval for periodic configuration sync on startup when play services
@@ -57,7 +62,7 @@ class RemoteConfigUtils {
                 .apply()
         }
 
-        fun getRemoteConfigStale(context: Context): Boolean =
+        fun isRemoteConfigStale(context: Context): Boolean =
             PreferenceManager.getDefaultSharedPreferences(context)
                 .getBoolean(REMOTE_CONFIG_STALE_PREF_KEY, true)
     }

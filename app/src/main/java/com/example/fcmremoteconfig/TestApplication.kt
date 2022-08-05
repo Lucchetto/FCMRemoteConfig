@@ -8,6 +8,15 @@ class TestApplication: Application() {
     override fun onCreate() {
         super.onCreate()
 
+        if (!RemoteConfigUtils.checkPlayServices(this)) {
+            RemoteConfigUtils.setupPeriodicSync()
+            RemoteConfigUtils.fetchPeriodic()
+        } else {
+            if (RemoteConfigUtils.isRemoteConfigStale(this)) {
+                RemoteConfigUtils.fetchFCM(applicationContext)
+            }
+        }
+
         println("register remote config topic")
         FirebaseMessaging.getInstance().subscribeToTopic("REMOTE_CONFIG").addOnCompleteListener {
             println("complete")
